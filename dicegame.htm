@@ -1,0 +1,273 @@
+<html>
+<head>
+    <style>
+    *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body
+        {
+            height: 100vh;
+           padding: 20px;
+             display: grid;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: sans-serif;
+            background-image: url(bi.jpg);
+            background-size: cover;
+        }
+        .main
+        {
+            padding: 20px;
+           display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            column-gap: 10rem;
+            font-size: 2rem;
+            transform: translateX(-20px);
+        }
+        .ai2
+        {
+            height: 100px;
+            width: 100px;
+        }
+        .start
+        {
+            height: 50px;
+            width: 150px;
+            background-color: lawngreen;
+            border-radius: 5px;
+            outline: none;
+            text-align: center;
+            font-size: 2rem;
+            transform: translateX(120px);
+            cursor: pointer;
+        }
+        .play_again
+        {
+            height: 50px;
+            width: 150px;
+            background-color: lawngreen;
+            border-radius: 10px;
+            outline: none;
+            text-align: center;
+            font-size: 1rem;
+            transform: translateX(90px);
+            cursor: pointer;
+        }
+        .total
+        {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            color: #f5ed51;
+            font-size: 2rem;
+        }
+        .result
+        {
+            font-size: 2rem;
+        }
+        .draw
+        {
+            color: #FFBD33;
+            font-style: bold;
+            font-size: 1.5rem;
+        }
+        .win
+        {
+            color: lawngreen;
+            font-style: bold;
+            font-size: 1.5rem;
+        }
+        .lose
+        {
+            color: red;
+            font-style: bold;
+            font-size: 1.5rem;
+        }
+            .congrats
+            {
+                display: none;
+                height: 40vh;
+                width: 30vw;
+                background-color: white;
+                transform: translateY(-250px);
+                border-radius: 18px;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+        .dwon
+        {
+           color: lawngreen;
+        }
+        .boxx
+        {
+                display: grid;
+                height: 300px;
+                width: 400px;
+                background-color: white;
+                transform: translateY(-250px);
+                border-radius: 18px;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+        }
+        .input
+        {
+            margin-bottom: 10px;
+            width: 250px;
+            height: 40px;
+            padding: 5px;
+            outline: none;
+            border-radius: 1px solid grey;
+            border-radius: 5px;
+            margin-top: -70px;
+        }
+        .button1
+        {
+            margin-bottom: 10px;
+            width: 250px;
+            height: 40px;
+            padding: 5px;
+            outline: none;
+            border-radius: 1px solid grey;
+            border-radius: 5px;
+            margin-top: -120px;
+            background-color: lawngreen;
+        }
+        .show
+        {
+            margin-top: -50px;
+        }
+    </style>
+    <body>
+        <p class="same total">Total: 0</p>
+        <div class="main">
+            <img class="ai2" src="User-Avatar-PNG-Image.png"/>
+            <img class="ai2" src="PngItem_1223088.png"/>
+        </div>
+        
+    <div class="main">
+        <p class="you">Player: 0</p>
+        <p class="ai">Bot: 0</p>
+        </div>
+        
+        <input type="button" class="start" onclick="run()" value="Start">
+        <span class="result"></span>
+        <p class="same win">You Won: 0</p>
+        <p class="same lose">You Lose: 0</p>
+        <p class="same draw">Draw: 0</p>
+        <div class="congrats">
+        <h1 class="message"></h1>
+        <h2 class="message dwon">You Won</h2>
+        <h2 class="message twin">Total Won</h2>
+        <h2 class="message tloss">Total Lose</h2>
+            <button class="play_again" onclick="Reload()">Play Again</button>
+        </div>
+        <div class="boxx">
+        How much time you want to play?<input type="number" class="input" id="input" placeholder="EX. 50,100,200,500 or any random number">
+            <button class="button1" onclick="button1()">PLAY</button>
+        </div>
+        
+    </body>
+    </head>
+    <script src="./confetti.js-master/confetti.js"></script>
+    <script>
+        const player = document.querySelector('.you');
+        const ai = document.querySelector('.ai');
+        const result = document.querySelector('.result');
+        const total = document.querySelector('.total');
+        const win = document.querySelector('.win');
+        const draw = document.querySelector('.draw');
+        const lose = document.querySelector('.lose');
+        const start = document.querySelector('.start');
+        const congrats = document.querySelector('.congrats');
+        const play_again = document.querySelector('.play_again');
+        const twin = document.querySelector('.twin');
+        const tloss = document.querySelector('.tloss');
+        const message = document.querySelector('.message');
+        const dwon = document.querySelector('.dwon');
+        const input = document.getElementById('input');
+        const boxx = document.querySelector('.boxx');
+     t = 0;
+     w = 0;
+     l = 0;
+     d = 0;
+    nextchance = 10;
+        function Reload() {
+                window.location.reload();
+            }
+        function run() {
+            
+            t += 1;
+           const total1 = total.innerText = 'Total: ' + t;
+    const random1 = (Math.floor(Math.random() * 6) + 1);
+        const random2 = (Math.floor(Math.random() * 6) + 1);
+                player.innerHTML = 'Player: ' + random1;
+                ai.innerHTML = 'Bot: ' + random2;
+            if(random1>random2)
+                {
+                    w += 1;
+                    win.innerText = 'You Won ' + w;
+                    twin.innerText = 'Total Won ' + w;
+                    result.innerHTML = 'You won';
+                    result.style.color = 'lawngreen';
+                }
+             else if(random1==random2)
+                {
+                     l += 1;
+                    draw.innerText = 'Draw ' + l;
+                    result.innerHTML = 'Draw';
+                    result.style.color = 'yellow';
+                }
+            else
+                {
+                     d += 1;
+                    lose.innerText = 'You Lost ' + d;
+                    tloss.innerText = 'Total Lost ' + d;
+                    result.innerHTML = 'You Lost';
+                    result.style.color = 'red';
+                }
+            
+            if(t == input.value && w>d)
+                {
+                    start.style.display = 'none';
+                    congrats.style.display = 'grid';
+                    message.innerText = 'CONGRATULATIONS';
+                    confetti.start();
+                    setTimeout(() => {
+                        confetti.stop();
+                        start.style.display = 'block';
+                    },5000);
+                }
+            else if(t == input.value && w<d)
+                {
+                    start.style.display = 'none';
+                    congrats.style.display = 'grid';
+                    message.innerText = 'BADLUCK TRYAGAIN';
+                    dwon.innerText = 'YOU LOST';
+                    setTimeout(() => {
+                        start.style.display = 'block';
+                    },5000);
+                }
+            else if(t == input.value && w==d)
+                {
+                     start.style.display = 'none';
+                    congrats.style.display = 'grid';
+                    message.innerText = 'NO WORDS FOR YOU!';
+                    dwon.innerText = 'DRAW';
+                    setTimeout(() => {
+                        start.style.display = 'block';
+                    },10000);
+                }
+        }
+        function button1() {
+                 boxx.style.display = 'none'; 
+        }
+    </script>
+</html>
